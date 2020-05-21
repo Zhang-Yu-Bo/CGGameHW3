@@ -7,6 +7,7 @@ public class CharacterControl : MonoBehaviour
     public float speed = 0;
     public float maxSpeed = 0.5f;
     public float minSpeed = 0.0f;
+    public Transform cameraTransform;
 
     private Animator _animator;
     private CharacterController _characterController;
@@ -28,19 +29,25 @@ public class CharacterControl : MonoBehaviour
 
     private void PlayerMovement()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            speed += Time.deltaTime;
-        }
-        else
-        {
-            speed -= Time.deltaTime;
-        }
 
-        speed = Mathf.Clamp(speed, 0.0f, 0.5f);
+        if (Application.platform == RuntimePlatform.WindowsPlayer ||
+            Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            Vector3 move = Vector3.zero;
+            if (Input.GetKey(KeyCode.W))
+            {
+                
+            }
+            else
+            {
+                
+            }
+            speed = Mathf.Clamp(speed, 0.0f, 0.5f);
 
-        _animator.SetFloat("Speed", speed);
-        Vector3 temp = _playerTransform.forward * speed;
-        _characterController.Move(temp);
+            _animator.SetFloat("Speed", speed);
+            Vector3 temp = _playerTransform.forward * speed;
+            _characterController.Move(temp);
+        }
+        
     }
 }

@@ -42,6 +42,9 @@ public class CameraControl : MonoBehaviour
                 xAngle -= Input.GetAxis("Mouse X") * xAngleSensitivity;
                 yAngle -= Input.GetAxis("Mouse Y") * yAngleSensitivity;
             }
+        }else if (Application.platform == RuntimePlatform.Android)
+        {
+            // test
         }
 
         xAngle = xAngle > 360 ? 0 : xAngle;

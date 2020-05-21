@@ -151,6 +151,7 @@ MonoBehaviour:
   speed: 0
   maxSpeed: 0.5
   minSpeed: 0
+  cameraTransform: {fileID: 1628389573}
 --- !u!4 &174224509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7383983188050681096, guid: 0ef876dd4b8d6fb48b38502c18cc237b,
