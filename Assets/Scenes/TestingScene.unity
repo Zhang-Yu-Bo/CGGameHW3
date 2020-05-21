@@ -148,6 +148,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1dfd11bafe005642b7069e8e5c8cd67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  maxSpeed: 0.5
+  minSpeed: 0
+--- !u!4 &174224509 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7383983188050681096, guid: 0ef876dd4b8d6fb48b38502c18cc237b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1824155978}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &190012556
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +477,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1600028920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1600028921}
+  m_Layer: 0
+  m_Name: Target Look At
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1600028921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600028920}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 174224509}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1628389570
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +519,7 @@ GameObject:
   - component: {fileID: 1628389572}
   - component: {fileID: 1628389571}
   - component: {fileID: 1628389574}
+  - component: {fileID: 1628389575}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -545,7 +585,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1628389570}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -3.381, y: 0.5, z: 1.12}
+  m_LocalPosition: {x: -3.5, y: 0.77, z: 1.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -619,6 +659,29 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 1
       enableBigTilePrepass: 1
       isFptlEnabled: 1
+--- !u!114 &1628389575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628389570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df683e05655acb8438e99c1536fbb2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookAtPlayer: {fileID: 1600028921}
+  yDistance: 5
+  maxDistance: 10
+  minDistance: 1
+  xAngle: 270
+  yAngle: 37
+  maxYAngle: 60
+  minYAngle: -60
+  xAngleSensitivity: 10
+  yAngleSensitivity: 2
+  scaleSensitivity: 10
 --- !u!1001 &1824155978
 PrefabInstance:
   m_ObjectHideFlags: 0
