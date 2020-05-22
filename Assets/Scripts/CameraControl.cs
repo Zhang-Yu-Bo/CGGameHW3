@@ -17,18 +17,23 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 移動相機到指定物件的後面，並且朝向指定物件
-        transform.position = lookAtPlayer.position + 
-                             -lookAtPlayer.forward * yDistance * Mathf.Cos(EulerToRadian(yAngle)) +
-                             lookAtPlayer.up * yDistance * Mathf.Sin(EulerToRadian(yAngle));
-        transform.LookAt(lookAtPlayer);
-        
+        if (lookAtPlayer != null)
+        {
+            // 移動相機到指定物件的後面，並且朝向指定物件
+            float xDistance = yDistance * Mathf.Cos(EulerToRadian(yAngle));
+            transform.position = lookAtPlayer.position +
+                                 lookAtPlayer.forward * xDistance * Mathf.Sin(EulerToRadian(xAngle)) +
+                                 lookAtPlayer.up * yDistance * Mathf.Sin(EulerToRadian(yAngle)) +
+                                 lookAtPlayer.right * xDistance * Mathf.Cos(EulerToRadian(xAngle));
+            transform.LookAt(lookAtPlayer);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        ControlViewport();
+        if (lookAtPlayer != null)
+            ControlViewport();
     }
 
     void ControlViewport()
@@ -52,13 +57,20 @@ public class CameraControl : MonoBehaviour
         yAngle = Mathf.Clamp(yAngle, minYAngle, maxYAngle);
         yDistance = Mathf.Clamp(yDistance, minDistance, maxDistance);
         float xDistance = yDistance * Mathf.Cos(EulerToRadian(yAngle));
-
-        transform.position = lookAtPlayer.position +
-                             lookAtPlayer.forward * xDistance * Mathf.Sin(EulerToRadian(xAngle)) +
-                             lookAtPlayer.up * yDistance * Mathf.Sin(EulerToRadian(yAngle)) +
-                             lookAtPlayer.right * xDistance * Mathf.Cos(EulerToRadian(xAngle));
+        
+        Vector3 newPosition = lookAtPlayer.position +
+                              Vector3.forward * xDistance * Mathf.Sin(EulerToRadian(xAngle)) +
+                              Vector3.up * yDistance * Mathf.Sin(EulerToRadian(yAngle)) +
+                              Vector3.right * xDistance * Mathf.Cos(EulerToRadian(xAngle));
+        transform.position = Vector3.Lerp(transform.position, newPosition, scaleSensitivity * Time.deltaTime * 0.65f);
 
         transform.LookAt(lookAtPlayer);
+        /*
+        Vector3 lookAtPosition = (lookAtPlayer.position - transform.position).normalized;
+        Quaternion lookAtRotation = Quaternion.LookRotation(lookAtPosition);
+        transform.rotation =
+            Quaternion.Slerp(transform.rotation, lookAtRotation, scaleSensitivity * Time.deltaTime);
+        */
     }
 
     float EulerToRadian(float euler)
