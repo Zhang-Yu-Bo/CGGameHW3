@@ -44,8 +44,13 @@ public class CameraControl : MonoBehaviour
             yDistance -= Input.GetAxis("Mouse ScrollWheel") * scaleSensitivity;
             if (Input.GetMouseButton(1))
             {
+                Cursor.visible = false;
                 xAngle -= Input.GetAxis("Mouse X") * xAngleSensitivity;
                 yAngle -= Input.GetAxis("Mouse Y") * yAngleSensitivity;
+            }
+            else
+            {
+                Cursor.visible = true;
             }
         }else if (Application.platform == RuntimePlatform.Android)
         {
