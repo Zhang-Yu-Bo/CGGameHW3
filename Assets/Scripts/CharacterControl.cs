@@ -19,10 +19,11 @@ public class CharacterControl : MonoBehaviour
     private float _animaParamSpeed = 0.0f;
     private Vector3 _gravityVelocity = Vector3.zero;
     private bool isGround = false;
-    
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
+        if (cameraTransform == null)
+            FindCameraTransform();
         _animator = gameObject.GetComponent<Animator>();
         _characterController = gameObject.GetComponent<CharacterController>();
     }
@@ -30,7 +31,10 @@ public class CharacterControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMovement();
+        if (cameraTransform == null)
+            FindCameraTransform();
+        else
+            PlayerMovement();
     }
 
     private void PlayerMovement()
@@ -61,7 +65,10 @@ public class CharacterControl : MonoBehaviour
             if (move != Vector3.zero)
             {
                 Quaternion facingRotation = Quaternion.LookRotation(move);
-                transform.rotation = Quaternion.Slerp(transform.rotation, facingRotation, facingSpeed * Time.deltaTime);
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation, 
+                    facingRotation, 
+                    facingSpeed * Time.deltaTime);
                 _animaParamSpeed += Time.deltaTime * speed;
                 _characterController.Move(move * speed * Time.deltaTime);
             }
@@ -85,5 +92,21 @@ public class CharacterControl : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
+    }
+
+    private void FindCameraTransform()
+    {
+        Camera myCamera = Camera.main;
+        if (myCamera != null)
+        {
+            cameraTransform = myCamera.transform;
+            int childCount = gameObject.transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                Transform child = gameObject.transform.GetChild(i);
+                if (child.gameObject.name == "Target Look At")
+                    myCamera.gameObject.GetComponent<CameraControl>().lookAtPlayer = child;
+            }
+        }
     }
 }

@@ -3,31 +3,16 @@
 public class CameraControl : MonoBehaviour
 {
     public Transform lookAtPlayer;
-    public float yDistance;
-    public float maxDistance;
-    public float minDistance;
-    public float xAngle;
-    public float yAngle;
-    public float maxYAngle;
-    public float minYAngle;
-    public float xAngleSensitivity;
-    public float yAngleSensitivity;
-    public float scaleSensitivity;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (lookAtPlayer != null)
-        {
-            // 移動相機到指定物件的後面，並且朝向指定物件
-            float xDistance = yDistance * Mathf.Cos(EulerToRadian(yAngle));
-            transform.position = lookAtPlayer.position +
-                                 lookAtPlayer.forward * xDistance * Mathf.Sin(EulerToRadian(xAngle)) +
-                                 lookAtPlayer.up * yDistance * Mathf.Sin(EulerToRadian(yAngle)) +
-                                 lookAtPlayer.right * xDistance * Mathf.Cos(EulerToRadian(xAngle));
-            transform.LookAt(lookAtPlayer);
-        }
-    }
+    public float yDistance = 5;
+    public float maxDistance = 10;
+    public float minDistance = 1;
+    public float xAngle = 270;
+    public float yAngle = 37;
+    public float maxYAngle = 60;
+    public float minYAngle = -60;
+    public float xAngleSensitivity = 10;
+    public float yAngleSensitivity = 2;
+    public float scaleSensitivity = 10;
 
     // Update is called once per frame
     void Update()
