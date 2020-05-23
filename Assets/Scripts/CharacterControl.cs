@@ -27,12 +27,7 @@ public class CharacterControl : MonoBehaviour
         
         // find joystick
         if (_moveJoystick == null)
-        {
-            FloatingJoystick[] joysticks = FindObjectsOfType<FloatingJoystick>();
-            foreach (FloatingJoystick joystick in joysticks)
-                if (joystick.gameObject.name == "Move Joystick")
-                    _moveJoystick = joystick;
-        }
+            FindJoystick();
     }
 
     // Update is called once per frame
@@ -40,13 +35,7 @@ public class CharacterControl : MonoBehaviour
     {
         // find joystick
         if (_moveJoystick == null)
-        {
-            FloatingJoystick[] joysticks = FindObjectsOfType<FloatingJoystick>();
-            foreach (FloatingJoystick joystick in joysticks)
-                if (joystick.gameObject.name == "Move Joystick")
-                    _moveJoystick = joystick;
-        }
-        
+            FindJoystick();
         if (cameraTransform == null)
             FindCameraTransform();
         else
@@ -85,7 +74,9 @@ public class CharacterControl : MonoBehaviour
             {
                 _gravityVelocity.y = Mathf.Sqrt(jumpPower * -2f * gravity);
             }
-
+        }
+        else
+        {
             // Android Control
             if (_moveJoystick != null)
             {
@@ -94,11 +85,6 @@ public class CharacterControl : MonoBehaviour
                 if (Mathf.Abs(_moveJoystick.Horizontal) > 0.15f)
                     move += (new Vector3(facing.z, 0, -facing.x) * _moveJoystick.Horizontal);
             }
-        }
-        else
-        {
-            // android
-            
         }
 
         if (move != Vector3.zero)
@@ -140,5 +126,13 @@ public class CharacterControl : MonoBehaviour
                     myCamera.gameObject.GetComponent<CameraControl>().lookAtPlayer = child;
             }
         }
+    }
+
+    private void FindJoystick()
+    {
+        FloatingJoystick[] joysticks = FindObjectsOfType<FloatingJoystick>();
+        foreach (FloatingJoystick joystick in joysticks)
+            if (joystick.gameObject.name == "Move Joystick")
+                _moveJoystick = joystick;
     }
 }
