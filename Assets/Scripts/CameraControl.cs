@@ -27,13 +27,13 @@ public class CameraControl : MonoBehaviour
         if (PlayerPrefs.HasKey("CharacterRecord"))
         {
             if (PlayerPrefs.GetInt("CharacterRecord") == 1)
-                Instantiate(MainCharacter, rebornPosition);
+                Instantiate(MainCharacter, rebornPosition.position, Quaternion.identity);
             else
-                Instantiate(Alice, rebornPosition);
+                Instantiate(Alice, rebornPosition.position, Quaternion.identity);
         }
         else
         {
-            Instantiate(MainCharacter, rebornPosition);
+            Instantiate(MainCharacter, rebornPosition.position, Quaternion.identity);
         }
         if (lookAtPlayer != null)
             ControlViewport();
