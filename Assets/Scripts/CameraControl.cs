@@ -13,6 +13,9 @@ public class CameraControl : MonoBehaviour
     public float xAngleSensitivity = 10;
     public float yAngleSensitivity = 2;
     public float scaleSensitivity = 10;
+    public Transform rebornPosition;
+    public GameObject MainCharacter;
+    public GameObject Alice;
     
     private FloatingJoystick _rotateJoystick;
     private FloatingJoystick _moveJoystick;
@@ -21,6 +24,17 @@ public class CameraControl : MonoBehaviour
 
     private void Awake()
     {
+        if (PlayerPrefs.HasKey("CharacterRecord"))
+        {
+            if (PlayerPrefs.GetInt("CharacterRecord") == 1)
+                Instantiate(MainCharacter, rebornPosition);
+            else
+                Instantiate(Alice, rebornPosition);
+        }
+        else
+        {
+            Instantiate(MainCharacter, rebornPosition);
+        }
         if (lookAtPlayer != null)
             ControlViewport();
         if (_rotateJoystick == null)
