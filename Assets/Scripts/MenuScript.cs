@@ -23,6 +23,7 @@ public class MenuScript : MonoBehaviour
         {
             selectCharacter.value = PlayerPrefs.GetInt("CharacterRecord");
         }
+            
     }
 
     // Update is called once per frame

@@ -41,7 +41,7 @@ public class CharacterControl : MonoBehaviour
             FindJoystick();
         if (cameraTransform == null)
             FindCameraTransform();
-        else if (_characterController.enabled)
+        else
             PlayerMovement();
     }
     
