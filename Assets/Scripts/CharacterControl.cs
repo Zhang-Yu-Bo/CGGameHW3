@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
@@ -10,12 +11,14 @@ public class CharacterControl : MonoBehaviour
     public float groundDistance;
     public LayerMask groundMask;
     public float jumpPower;
+    public Material originalMaterial;
+    public Material translateMaterial;
 
     private Animator _animator;
     private CharacterController _characterController;
-    private float _animaParamSpeed = 0.0f;
+    private float _animationParamSpeed = 0.0f;
     private Vector3 _gravityVelocity = Vector3.zero;
-    private bool isGround = false;
+    private bool _isGround = false;
     private FloatingJoystick _moveJoystick;
 
     private void Awake()
@@ -48,8 +51,8 @@ public class CharacterControl : MonoBehaviour
         // gravity control
         _gravityVelocity.y += gravity * Time.deltaTime;
         _characterController.Move(_gravityVelocity * Time.deltaTime);
-        isGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if (isGround && _gravityVelocity.y < 0)
+        _isGround = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        if (_isGround && _gravityVelocity.y < 0)
             _gravityVelocity.y = -2f;
 
         // facing camera forward direction
@@ -70,7 +73,7 @@ public class CharacterControl : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
                 move += new Vector3(facing.z, 0, -facing.x);
 
-            if (Input.GetKey(KeyCode.Space) && isGround)
+            if (Input.GetKey(KeyCode.Space) && _isGround)
             {
                 _gravityVelocity.y = Mathf.Sqrt(jumpPower * -2f * gravity);
             }
@@ -94,15 +97,15 @@ public class CharacterControl : MonoBehaviour
                 transform.rotation,
                 facingRotation,
                 facingSpeed * Time.deltaTime);
-            _animaParamSpeed += Time.deltaTime * speed;
+            _animationParamSpeed += Time.deltaTime * speed;
             _characterController.Move(move * speed * Time.deltaTime);
         }
         else
         {
-            _animaParamSpeed -= Time.deltaTime * speed;
+            _animationParamSpeed -= Time.deltaTime * speed;
         }
-        _animaParamSpeed = Mathf.Clamp(_animaParamSpeed, 0.0f, 0.5f);
-        _animator.SetFloat("Speed", _animaParamSpeed);
+        _animationParamSpeed = Mathf.Clamp(_animationParamSpeed, 0.0f, 0.5f);
+        _animator.SetFloat("Speed", _animationParamSpeed);
         
     }
 
@@ -134,5 +137,23 @@ public class CharacterControl : MonoBehaviour
         foreach (FloatingJoystick joystick in joysticks)
             if (joystick.gameObject.name == "Move Joystick")
                 _moveJoystick = joystick;
+    }
+
+    private Vector3 _recordRebornPoint;
+    
+    public void TranslateTo(Vector3 position)
+    {
+        _characterController.enabled = false;
+        Vector3 temp = transform.position;
+        _animator.SetBool("Translate", true);
+        _recordRebornPoint = position;
+    }
+
+    public void TranslateEnd()
+    {
+        _animator.SetBool("Translate", false);
+        transform.position = _recordRebornPoint;
+        _characterController.enabled = true;
+        gameObject.GetComponentInChildren<SkinnedMeshRenderer>().material = originalMaterial;
     }
 }
