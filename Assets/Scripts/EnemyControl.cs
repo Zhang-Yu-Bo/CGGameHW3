@@ -42,12 +42,14 @@ public class EnemyControl : MonoBehaviour
         {
             if ((_player.transform.position - transform.position).magnitude <= lookRadius)
             {
-                // track
+				// track
+				lookRadius = 20;
                 _agent.SetDestination(_player.transform.position);
             }
             else
             {
-                // untrack
+				// untrack
+				lookRadius = 10;
                 _agent.SetDestination(_myPosition);
             }
         }
