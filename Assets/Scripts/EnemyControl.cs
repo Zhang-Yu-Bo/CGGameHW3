@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyControl : MonoBehaviour
@@ -12,7 +9,7 @@ public class EnemyControl : MonoBehaviour
     private NavMeshAgent _agent;
     private Animator _animator;
     private GameObject _player;
-    
+    private Vector3 _myPosition;
 
     private void Awake()
     {
@@ -20,6 +17,7 @@ public class EnemyControl : MonoBehaviour
         _animator = gameObject.GetComponent<Animator>();
         if (_player == null)
             FindPlayer();
+        _myPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -42,7 +40,16 @@ public class EnemyControl : MonoBehaviour
             FindPlayer();
         else
         {
-            
+            if ((_player.transform.position - transform.position).magnitude <= lookRadius)
+            {
+                // track
+                _agent.SetDestination(_player.transform.position);
+            }
+            else
+            {
+                // untrack
+                _agent.SetDestination(_myPosition);
+            }
         }
 
         // animation
