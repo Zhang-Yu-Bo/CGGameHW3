@@ -13,7 +13,7 @@ public class DialogueTrigger : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!this._isTrigger)
+		if (this.gameObject.GetComponent<DialogueTriggerB>()._isTrigger)
         {
             this.TriggerDialogue();
             this._isTrigger = true;
