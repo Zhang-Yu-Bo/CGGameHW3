@@ -25,8 +25,8 @@ public class FinalSceneScript : MonoBehaviour
         }
         else
         {
-            alice.SetActive(false);
-            mainCharacter.SetActive(true);
+            alice.SetActive(true);
+            mainCharacter.SetActive(false);
         }
     }
 
