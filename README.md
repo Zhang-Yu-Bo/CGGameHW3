@@ -8,7 +8,7 @@
 * 厲害技術
 > 力場shader\
 > 消失shader\
-> 使用lightweight render pipeline 2.3.0\
+> 使用lightweight render pipeline 2.3.0，來達到抗鋸齒的效果與光影變化\
 > 從上市遊戲白貓中，"借"人物白模與貼圖，並透過blende架設人物骨架，套上Maximo的動畫\
 > 使用Shader Graph能更方便且快速的撰寫shader\
 > 相機線性移動與選轉，讓畫面看起來更加流暢與舒服
