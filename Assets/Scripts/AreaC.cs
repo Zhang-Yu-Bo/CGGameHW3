@@ -34,15 +34,18 @@ public class AreaC : MonoBehaviour
 			{
 				_myDialogueTrigger.TriggerDialogue(2);
 			}
-			if (trigCount == 0)
+			else
 			{
-				_myDialogueTrigger.TriggerDialogue(0);
-				trigCount++;
-			}
-			else if (trigCount == 1&&other.GetComponent<CharacterControl>().haveKey)
-			{
-				_myDialogueTrigger.TriggerDialogue(1);
-				trigCount++;
+				if (trigCount == 0)
+				{
+					_myDialogueTrigger.TriggerDialogue(0);
+					trigCount++;
+				}
+				else if (trigCount == 1 && other.GetComponent<CharacterControl>().haveKey)
+				{
+					_myDialogueTrigger.TriggerDialogue(1);
+					trigCount++;
+				}
 			}
 		}
 	}
