@@ -21,6 +21,10 @@ public class CharacterControl : MonoBehaviour
     private bool _isGround = false;
     private FloatingJoystick _moveJoystick;
 
+	public bool haveLetter = false;
+	public bool haveKey = false;
+	public bool suggest = false;
+
     private void Awake()
     {
         if (cameraTransform == null)

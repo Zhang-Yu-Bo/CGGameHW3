@@ -32,6 +32,7 @@ public class NPC1 : MonoBehaviour
                 _myDialogueTrigger.TriggerDialogue(whichDialogue);
                 whichDialogue++;
             }
+			other.GetComponent<CharacterControl>().haveLetter = true;
         }
     }
 }
