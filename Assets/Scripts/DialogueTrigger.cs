@@ -2,22 +2,11 @@
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public Dialogue dialogue;
-    private bool _isTrigger = false;
+    public Dialogue[] dialogue;
 
-    public void TriggerDialogue()
+    public void TriggerDialogue(int id)
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(this.dialogue);
+        FindObjectOfType<DialogueManager>().StartDialogue(this.dialogue[id]);
     }
 
-    
-    private void OnTriggerEnter(Collider other)
-    {
-		if (this.gameObject.GetComponent<DialogueTriggerB>()._isTrigger)
-        {
-            this.TriggerDialogue();
-            this._isTrigger = true;
-        }
-    }
-    
 }

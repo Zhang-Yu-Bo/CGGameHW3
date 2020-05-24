@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class NPC2 : MonoBehaviour
+public class NPC1 : MonoBehaviour
 {
     public int whichDialogue = 0;
 
