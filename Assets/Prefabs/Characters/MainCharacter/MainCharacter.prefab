@@ -404,6 +404,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   jumpPower: 3
+  originalMaterial: {fileID: 0}
+  translateMaterial: {fileID: 0}
 --- !u!1 &2481802360239032159
 GameObject:
   m_ObjectHideFlags: 0
