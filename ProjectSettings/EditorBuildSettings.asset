@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameStage.unity
     guid: 779e927217ce5ed44a6536613bfde79a
   - enabled: 1
-    path: Assets/Scenes/TestingScene.unity
-    guid: f82b44fc5664e644498f03970f5c888d
+    path: Assets/Scenes/FinalScene.unity
+    guid: 071412b3ea3fd7e4b9979cb1bedf312a
   m_configObjects: {}
