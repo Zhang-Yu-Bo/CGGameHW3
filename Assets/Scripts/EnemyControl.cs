@@ -27,14 +27,14 @@ public class EnemyControl : MonoBehaviour
             return;
 
         // Debug
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                Debug.Log(hit.point);
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    if (Physics.Raycast(ray, out RaycastHit hit))
+        //    {
+        //        Debug.Log(hit.point);
+        //    }
+        //}
         
         if (_player == null)
             FindPlayer();
